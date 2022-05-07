@@ -1,5 +1,6 @@
 export const getContacts = state => state.contacts.items;
 export const getFilterValue = state => state.contacts.filter;
+export const getLoader = state => state.contacts.loader;
 
 export const getFilteredItems = (state) => {
         if (getFilterValue(state).trim() !== '') {
