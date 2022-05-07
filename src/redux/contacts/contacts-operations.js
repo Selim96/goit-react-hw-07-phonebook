@@ -1,5 +1,15 @@
 import axios from "axios";
-import {addContactsRequest, addContactsSuccess, addContactsError, deleteContactsRequest, deleteContactsSuccess, deleteContactsError, fetchContactsRequest, fetchContactsSuccess, fetchContactsError} from './contacts-actions';
+import {
+    addContactsRequest,
+    addContactsSuccess,
+    addContactsError,
+    deleteContactsRequest,
+    deleteContactsSuccess,
+    deleteContactsError,
+    fetchContactsRequest,
+    fetchContactsSuccess,
+    fetchContactsError
+} from './contacts-actions';
 
 axios.defaults.baseURL = "https://6273eb0d345e1821b224332f.mockapi.io/contacts";
 

@@ -23,3 +23,12 @@ ul {
 #root {
   padding: 15px;
 }
+
+.contactsHeader {
+  display: flex;
+  align-items: center;
+}
+
+.contactsTitle {
+  margin-right: 5px;
+}

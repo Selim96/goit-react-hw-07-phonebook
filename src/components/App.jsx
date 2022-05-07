@@ -1,17 +1,29 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import ContactForm from './ContactForm';
 import Filter from './Filter';
 import ContactList from './ContactList';
+import { Oval } from 'react-loader-spinner';
+import { getLoader } from 'redux/contacts/contacts-selectors';
 
 function App() {
+  const onLoading = useSelector(getLoader);
   
   return <div>
-        <h1>Phonebook</h1>
-        <ContactForm />
-        <h2>Contacts</h2>
-        <Filter />
-        <ContactList />
+  <h1>Phonebook</h1>
+    <ContactForm />
+    <div className='contactsHeader'>
+      <h2 className='contactsTitle'>Contacts</h2>
+            {onLoading && <Oval
+            height="20"
+            width="20"
+            color='rgb(14, 7, 105)'
+            ariaLabel='loading'
+            />}
     </div>
+      <Filter />
+      <ContactList />
+</div>
 }
 
 // ===============================================
