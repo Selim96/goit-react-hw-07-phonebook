@@ -10,7 +10,7 @@ import {
     deleteContactsError,
     fetchContactsRequest,
     fetchContactsSuccess,
-    fetchContactsError
+    fetchContactsError,
 } from '../contacts/contacts-actions';
 
 const itemsReducer = createReducer([], {

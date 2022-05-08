@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getContacts} from 'redux/contacts/contacts-selectors';
+import { useCreateContactsMutation, useGetContactsQuery } from 'redux/contacts/contacts-RTK-operations';
+import { Oval } from 'react-loader-spinner';
 import s from './ContactForm.module.css';
-// import { nanoid } from 'nanoid';
-import { addContact } from '../../redux/contacts/contacts-operations';
 
 function ContactForm() {
   const [name, setName] = useState('');
@@ -12,8 +10,8 @@ function ContactForm() {
     name,
     number,
   };
-  const dispatch = useDispatch();
-  const contactsStore = useSelector(getContacts);
+  // const dispatch = useDispatch();
+  // const contactsStore = useSelector(getContacts);
 
   const handlChange = e => {
     switch (e.currentTarget.name) {
@@ -30,15 +28,19 @@ function ContactForm() {
     }
   };
 
-  const checkFunction = () => (contactsStore.some(v => v.name.toLowerCase() === name.toLowerCase())); 
+  const { data } = useGetContactsQuery();
+  const checkFunction = () => (data.some(v => v.name.toLowerCase() === name.toLowerCase())); 
     
+  const [createContacts, { isLoading }] = useCreateContactsMutation();
+
   const handlSubmit = e => {
     e.preventDefault();
       if (checkFunction()) {
         alert(`${name} is already in contacts!`);
         return;
     };
-      dispatch(addContact(formOutput));
+    createContacts(formOutput);
+      // dispatch(addContact(formOutput));
       setName('');
       setNumber('');    
     }
@@ -72,7 +74,13 @@ function ContactForm() {
         onChange={handlChange}
       />
     </label>
-    <button type='submit' className={s.button}>Add contact</button>
+      <button type='submit' className={s.button} disabled={isLoading}>
+        {isLoading && <Oval
+            height="10"
+            width="10"
+            color='rgb(14, 7, 105)'
+            ariaLabel='loading'
+            />} Add contact</button>
   </form>);
 }
 export default ContactForm;
